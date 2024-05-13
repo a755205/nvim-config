@@ -76,8 +76,17 @@ keymap("n", "<leader>mt", ":%s/<C-r><C-w>/<C-r><C-w>/g<Left><Left><Left>", opts)
 -- kent's custom keymap use function
 require("kent/myKeymaps")
 
--- keymap.set("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", { desc = "Fuzzy find recent files" })
--- trouble
+-- Highlight when yanking (copying) text
+--  Try it with `yap` in normal mode
+--  See `:help vim.highlight.on_yank()`
+vim.api.nvim_create_autocmd("TextYankPost", {
+	desc = "Highlight when yanking (copying) text",
+	group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
+	callback = function()
+		vim.highlight.on_yank()
+	end,
+})
+
 vim.keymap.set("n", "<leader>xx", function()
 	require("trouble").toggle()
 end, { desc = "Trouble" })
