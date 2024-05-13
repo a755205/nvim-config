@@ -56,6 +56,9 @@ return {
 
 			--show keymaps
 			keymap.set("n", "<leader>fk", "<cmd>Telescope keymaps<cr>", { desc = "Fuzzy find keymaps" })
+
+			-- TODO: add keymap for show diagnostics
+			keymap.set("n", "<leader>fd", "<cmd>Telescope lsp_document_diagnostics<cr>", { desc = "Show diagnostics" })
 		end,
 	},
 	{

@@ -4,6 +4,9 @@ opt = vim.opt
 cmd = vim.cmd
 api = vim.api
 
+local keymap = vim.api.nvim_set_keymap
+local opts = { noremap = true, silent = true }
+
 opt.number = true -- 啟動行數
 opt.relativenumber = true -- 啟動相對行數
 opt.clipboard = "unnamedplus" -- 允許vim訪問系統剪貼簿
@@ -31,14 +34,24 @@ opt.writebackup = false -- if a file is being edited by another program (or was 
 opt.expandtab = true -- convert tabs to spaces
 opt.shiftwidth = 2 -- the number of spaces inserted for each indentation
 opt.tabstop = 2 -- insert 2 spaces for a tab
-opt.cursorline = false -- 游標行線, highlight the current line
+opt.cursorline = true -- 游標行線, highlight the current line
 opt.numberwidth = 4 -- set number column width to 2 {default 4}
 opt.signcolumn = "yes" -- always show the sign column, otherwise it would shift the text each time
 opt.wrap = false -- display lines as one long line
-opt.scrolloff = 8 -- is one of my fav
 opt.sidescrolloff = 8
 opt.guifont = "monospace:h17" -- the font used in graphical neovim applications
---[[ opt.colorcolumn = "80" ]]
+opt.inccommand = "split" -- Preview substitutions live, as you type!
+opt.scrolloff = 10 -- Minimal number of screen lines to keep above and below the cursor.
+
+-- Set highlight on search, but clear on pressing <Esc> in normal mode
+vim.opt.hlsearch = true
+keymap("n", "<Esc>", "<cmd>nohlsearch<CR>", opts)
+
+-- keymap("n", "<D-]>", ":bnext<CR>", opts)
+--
+-- keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Fuzzy find files in cwd 尋找檔案" })
+
+-- keymap("n", "<D-]>", ":bnext<CR>", opts)
 
 opt.shortmess:append("c")
 
