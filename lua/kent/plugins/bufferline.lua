@@ -9,11 +9,7 @@ return {
 			--[[ diagnostics = "nvim_lsp", -- false | "nvim_lsp" | "coc" ]]
 			diagnostics = "nvim_lsp", -- false | "nvim_lsp" | "coc"
 			-- [[ separator_style = "slant",  --  "slant" | "thick" | "thin" | { 'any', 'any' }, ]]
-			separator_style = "slant",
-			--[[ indicator = { ]]
-			--[[   icon = '▎', -- this should be omitted if indicator style is not 'icon' ]]
-			--[[   style =  'none' , ]]
-			--[[ }, ]]
+			separator_style = "clope",
 			git = {
 				enable = true,
 			},
