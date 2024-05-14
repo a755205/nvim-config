@@ -55,8 +55,10 @@ keymap("n", "<Esc>", "<cmd>nohlsearch<CR>", opts)
 
 opt.shortmess:append("c")
 
-vim.cmd("set whichwrap+=<,>,[,],h,l")
-vim.cmd([[set iskeyword+=-]])
+vim.cmd("set whichwrap+=<,>,[,],h,l") --設定左右移動時可以跨行
+vim.cmd([[set iskeyword+=-]]) -- 設定 - 為字串的一部分
+vim.cmd([[set showtabline=0]]) -- 關閉tab
+--
 
 -- 禁用 nvim-notify
 vim.g.notify_on_action = 0
