@@ -48,10 +48,10 @@ return {
 		}
 
 		dashboard.section.buttons.val = {
-			dashboard.button("f", "  Find file", ":Telescope find_files<CR>"),
-			dashboard.button("s", "  Find word", ":Telescope live_grep<CR>"),
-			dashboard.button("r", "  Recently opened files", ":Telescope oldfiles<CR>"),
-			dashboard.button("q", "  Quit", ":qa<CR>"),
+			dashboard.button("f", "   Find file", ":Telescope find_files<CR>"),
+			dashboard.button("s", "   Find word", ":Telescope live_grep<CR>"),
+			dashboard.button("r", "   Recently opened files", ":Telescope oldfiles<CR>"),
+			dashboard.button("q", "   Quit", ":qa<CR>"),
 		}
 
 		alpha.setup(dashboard.opts)
