@@ -116,6 +116,8 @@ alias vim='nvim'
 alias v='nvim'
 
 alias lg='lazygit'
+alias lp='lazynpm'
+alias ld='lazydocker'
 alias cat='bat'
 
 # Alias [cd]
