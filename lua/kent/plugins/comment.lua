@@ -51,7 +51,7 @@ return {
 			pre_hook = ts_context_commentstring.create_pre_hook(),
 			---Function to call after (un)comment
 			-- post_hook = nil,
-			post_hook = function(ctx) end,
+			post_hook = function() end,
 		})
 	end,
 }
