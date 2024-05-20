@@ -14,6 +14,13 @@ function close_and_switch_buffer()
 	local buffers = vim.api.nvim_list_bufs()
 	local closest_buffer = nil
 
+	local current_buffer_name = vim.api.nvim_buf_get_name(current_buffer)
+
+	if current_buffer_name == "" then
+		print("current buffer is Alpha!!!")
+		return
+	end
+
 	for _, buf in ipairs(buffers) do
 		if string.find(vim.api.nvim_buf_get_name(buf), "NvimTree") then
 			-- skit loop for this time
@@ -29,14 +36,22 @@ function close_and_switch_buffer()
 
 	-- Switch to the closest buffer
 	if closest_buffer then
+		local next_buffer = vim.api.nvim_buf_get_name(closest_buffer)
+		-- if next_nuffer is no name, then open alpha
+		if next_buffer == "" then
+			vim.cmd("Alpha")
+			return
+		end
+
 		print("Switching to buffer: " .. vim.api.nvim_buf_get_name(closest_buffer))
 		vim.api.nvim_set_current_buf(closest_buffer)
 	else
 		vim.cmd("Alpha")
 		print("No more buffers to switch to!")
+		return
 	end
 
-	-- Delete the current buffer
+	-- close the current buffer
 	vim.api.nvim_buf_delete(current_buffer, { force = true })
 end
 
