@@ -1,9 +1,8 @@
 local keymap = vim.api.nvim_set_keymap
-local opts = { noremap = true, silent = true }
 
 vim.g.mapleader = " "
 
-function close_and_switch_buffer()
+function Close_and_switch_buffer()
 	local current_buffer = vim.api.nvim_get_current_buf()
 
 	if vim.api.nvim_buf_get_option(current_buffer, "modified") then
@@ -17,13 +16,13 @@ function close_and_switch_buffer()
 	local current_buffer_name = vim.api.nvim_buf_get_name(current_buffer)
 
 	if current_buffer_name == "" then
-		print("current buffer is Alpha!!!")
+		print("Current buffer is Alpha, open another buffer first!")
 		return
 	end
 
 	for _, buf in ipairs(buffers) do
 		if string.find(vim.api.nvim_buf_get_name(buf), "NvimTree") then
-			-- skit loop for this time
+			-- skit loop for this time, if the buffer is NvimTree
 			goto continue
 		end
 
@@ -37,7 +36,6 @@ function close_and_switch_buffer()
 	-- Switch to the closest buffer
 	if closest_buffer then
 		local next_buffer = vim.api.nvim_buf_get_name(closest_buffer)
-		-- if next_nuffer is no name, then open alpha
 		if next_buffer == "" then
 			vim.cmd("Alpha")
 			return
@@ -55,4 +53,9 @@ function close_and_switch_buffer()
 	vim.api.nvim_buf_delete(current_buffer, { force = true })
 end
 
-keymap("n", "<leader>w", ":lua close_and_switch_buffer()<CR>", opts)
+keymap(
+	"n",
+	"<leader>w",
+	":lua Close_and_switch_buffer()<CR>",
+	{ noremap = true, silent = true, desc = "Close and switch buffer" }
+)
