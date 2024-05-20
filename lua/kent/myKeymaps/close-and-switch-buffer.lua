@@ -29,9 +29,10 @@ function close_and_switch_buffer()
 
 	-- Switch to the closest buffer
 	if closest_buffer then
-		-- print("Switching to buffer: " .. vim.api.nvim_buf_get_name(closest_buffer))
+		print("Switching to buffer: " .. vim.api.nvim_buf_get_name(closest_buffer))
 		vim.api.nvim_set_current_buf(closest_buffer)
 	else
+		vim.cmd("Alpha")
 		print("No more buffers to switch to!")
 	end
 
