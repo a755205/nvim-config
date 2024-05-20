@@ -95,11 +95,13 @@ return {
 		vim.api.nvim_set_keymap("n", "<leader>ee", ":NvimTreeToggle<CR>", { noremap = true, silent = true })
 
 		-- 在buffer中打开nvim-tree後，會指向結構下的這個buffer檔案
+		--
+		-- set [leader ef] whan cursor in the buffer, it will open nvim-tree and focus on the file, but when NvimTeer is open, do not colse nvim-tree
 		vim.api.nvim_set_keymap(
 			"n",
 			"<leader>ef",
-			"<cmd>NvimTreeFindFileToggle<CR>",
-			{ noremap = true, silent = true, desc = "Toggle file explorer on current file" }
+			"<cmd>NvimTreeFindFile<CR>",
+			{ noremap = true, silent = true, desc = "Find file in nvim-tree" }
 		)
 
 		-- 把樹狀都關掉
