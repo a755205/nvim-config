@@ -6,6 +6,9 @@ return {
 		local opts = { noremap = true, silent = true }
 		local keymap = vim.api.nvim_set_keymap
 
+		opts.desc = "[Goto Preview] → " -- desc for which-key gp as '"[plugin]Goto Preview"' and do nothing, just for display
+		keymap("n", "gp", "<cmd>lua<CR>", opts)
+
 		opts.desc = "Goto Preview Definition"
 		keymap("n", "gpd", "<cmd>lua require('goto-preview').goto_preview_definition()<CR>", opts)
 
@@ -18,7 +21,7 @@ return {
 		opts.desc = "Goto Preview Declaration"
 		keymap("n", "gpD", "<cmd>lua require('goto-preview').goto_preview_declaration()<CR>", opts)
 
-		opts.desc = "Close All Windows"
+		opts.desc = "[Goto Preview] Close All Preview Windows"
 		keymap("n", "gP", "<cmd>lua require('goto-preview').close_all_win()<CR>", opts)
 
 		opts.desc = "Goto Preview References"
