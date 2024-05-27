@@ -42,22 +42,14 @@ return {
 			local builtin = require("telescope.builtin")
 			local keymap = vim.keymap
 
-			keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Fuzzy find files in cwd 尋找檔案" })
-			keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Fuzzy find buffers" })
-			keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Fuzzy find help tags" })
-			keymap.set("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", { desc = "Fuzzy find recent files" })
-			keymap.set("n", "<leader>ft", "<cmd>TodoTelescope<cr>", { desc = "Find all todos" })
-			keymap.set("n", "<leader>fn", "<cmd>Telescope notify<cr>", { desc = "Find all todos" })
-
-			-- find string in files
+			keymap.set("n", "<leader>ff", builtin.find_files, { desc = "尋找檔案" })
+			keymap.set("n", "<leader>fb", builtin.buffers, { desc = "尋找buffers" })
+			keymap.set("n", "<leader>ft", builtin.help_tags, { desc = "Fuzzy find help tags" })
+			keymap.set("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", { desc = "最近檔案" })
+			keymap.set("n", "<leader>fn", "<cmd>TodoTelescope<cr>", { desc = "尋找TODO" })
 			keymap.set("n", "<leader>fs", builtin.live_grep, { desc = "Find string in cwd 尋找字串 " })
-			-- find word file and path both
 			keymap.set("n", "<leader>fc", "<cmd>Telescope grep_string<cr>", { desc = "Find String under cursor" })
-
-			--show keymaps
 			keymap.set("n", "<leader>fk", "<cmd>Telescope keymaps<cr>", { desc = "Fuzzy find keymaps" })
-
-			-- TODO: add keymap for show diagnostics
 			keymap.set("n", "<leader>fd", "<cmd>Telescope lsp_document_diagnostics<cr>", { desc = "Show diagnostics" })
 
 			-- harpoon
@@ -84,37 +76,48 @@ return {
 					})
 				end
 
+				local finder = function()
+					local paths = {}
+					for _, item in ipairs(harpoon_files.items) do
+						table.insert(paths, item.value)
+					end
+
+					return require("telescope.finders").new_table({
+						results = paths,
+					})
+				end
+
 				require("telescope.pickers")
 					.new({}, {
 						prompt_title = "Harpoon",
-						finder = require("telescope.finders").new_table({
-							results = file_paths,
-						}),
+						finder = finder(),
 						previewer = conf.file_previewer({}),
 						sorter = conf.generic_sorter({}),
-						-- TODO: remove item from harpoon list
-						--
-						-- attach_mappings = function(prompt_bufner_number, map)
-						--
-						-- 	keymap.set("i", "<C-d>", function()
-						-- 		local selection = require("telescope.actions.state")
-						-- 		local selected_entry = selection.get_selected_entry()
-						-- 		local current_picker = selection.get_current_picker(prompt_bufner_number)
-						-- 		print("remove item from harpoon list")
-						-- 		print(selected_entry)
-						--
-						-- 		harpoon:list():remove(selected_entry)
-						-- 		current_picker:refresh(make_finder())
-						-- 	end)
-						--
-						-- 	return true
-						-- end,
+						attach_mappings = function(prompt_bufnr, map)
+							local remove_item = function()
+								local state = require("telescope.actions.state")
+								local selected_entry = state.get_selected_entry()
+								local current_picker = state.get_current_picker(prompt_bufnr)
+
+								table.remove(harpoon_files.items, selected_entry.index)
+								current_picker:refresh(finder())
+							end
+
+							local mapOptions = { noremap = true, silent = true }
+
+							mapOptions["desc"] = "Remove item from harpoon list in normal mode"
+							map("n", "x", remove_item, mapOptions)
+
+							mapOptions["desc"] = "Remove item from harpoon list in insert mode"
+							map("i", "<C-x>", remove_item, mapOptions)
+
+							return true
+						end,
 					})
 					:find()
 			end
 
-			-- active harpoon window with <C-e>
-			vim.keymap.set("n", "<C-e>", function()
+			keymap.set("n", "<leader>fh", function()
 				toggle_telescope(harpoon:list())
 			end, { desc = "Open harpoon window" })
 		end,
