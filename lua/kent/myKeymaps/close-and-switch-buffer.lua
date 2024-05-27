@@ -37,8 +37,8 @@ function Close_and_switch_buffer()
 	if closest_buffer then
 		local next_buffer = vim.api.nvim_buf_get_name(closest_buffer)
 		if next_buffer == "" then
-			vim.cmd("Alpha")
-			return
+			-- vim.cmd("Alpha")
+			-- return
 		end
 
 		print("Switching to buffer: " .. vim.api.nvim_buf_get_name(closest_buffer))
@@ -49,8 +49,11 @@ function Close_and_switch_buffer()
 		return
 	end
 
-	-- close the current buffer
 	vim.api.nvim_buf_delete(current_buffer, { force = true })
+
+	if vim.api.nvim_buf_get_name(closest_buffer) == "" then
+		vim.cmd("Alpha")
+	end
 end
 
 keymap(
