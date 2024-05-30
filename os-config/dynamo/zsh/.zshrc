@@ -153,6 +153,7 @@ alias sync-kitty='cp ~/.config/kitty/kitty.conf ~/.config/nvim/os-config/dynamo/
 # [async (tmux, zsh, kitty)]
 alias sync-os='sync-tmux && sync-zsh && sync-kitty'
 
+
 # Alias [ls]
 alias ls='lsd'
 alias l='ls -la'
