@@ -131,10 +131,27 @@ alias tree2='tree -L 2'
 alias tree3='tree -L 3'
 
 #Alias [Zsh]
-alias modify-zshrc='vim ~/.zshrc'
-alias source-zshrc="source ~/.zshrc"
+alias mz='vim ~/.zshrc' # for modify zshrc
+alias sz="source ~/.zshrc" # for source zshrc
+
+# Alias [Exit]
 alias wqa='exit'
 alias wq='exit'
+
+# Alias [Tmux]
+alias tmux='tmux -f ~/.tmux.conf'
+alias mt='vim ~/.tmux.conf' # for modify tmux config
+alias st='tmux source-file $HOME/.tmux.conf'
+
+# Alias [Sync OS config to nvim os files]
+# [sync tmux]
+alias sync-tmux='cp ~/.tmux.conf ~/.config/nvim/os-config/dynamo/tmux'
+# [sync zsh]
+alias sync-zsh='cp ~/.zshrc ~/.config/nvim/os-config/dynamo/zsh'
+# [sync kitty]
+alias sync-kitty='cp ~/.config/kitty/kitty.conf ~/.config/nvim/os-config/dynamo/kitty'
+# [async (tmux, zsh, kitty)]
+alias sync-os='sync-tmux && sync-zsh && sync-kitty'
 
 # Alias [ls]
 alias ls='lsd'
@@ -143,7 +160,7 @@ alias ll='ls -la'
 alias lt='ls --tree'
 
 #Alias [Vim]
-alias modify-neovim='vim ~/.config/nvim'
+alias mn='vim ~/.config/nvim' # for modify nvim config
 alias chear-vim-cache="rm -rf ~/.local/share/nvim && rm -rf ~/.cache/nvim && rm -rf ~/.local/state/nvim"
 
 #Alias [Change Git]
@@ -166,13 +183,9 @@ alias vuerunstage='npm run build:stag && npm run stag -- --port=8888'
 
 
 
-#
-#
-#
 # Active SSH Agent
 if [ -z "$SSH_AUTH_SOCK" ] ; then
     eval `ssh-agent -s`
-    ssh-add ~/.ssh/kent-dynamo-mbp
 fi
 
 export NVM_DIR="$HOME/.nvm"
@@ -180,11 +193,11 @@ export NVM_DIR="$HOME/.nvm"
  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 
-# in start up, run add ssh key with password
-# set password is 'qwer123'
+# # in start up, run add ssh key with password
+# # set password is 'qwer123'
 DEV_SSH_PASS='qwer123'
-# 加入ssh key的脚本
-ADD_SCRIPT='ssh-add $HOME/.ssh/kent-dynamo-mbp'
+# # 加入ssh key的脚本
+# ADD_SCRIPT='ssh-add $HOME/.ssh/kent-dynamo-mbp'
 if [ -z "$SSH_AUTH_SOCK" ] ; then
     eval `ssh-agent -s`
     expect -c "
@@ -228,4 +241,6 @@ export FZF_CTRL_R_OPTS="
 # ---- Zoxide (better cd) ----
 eval "$(zoxide init zsh)"
 alias cd="z"
+
+
 
