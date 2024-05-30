@@ -79,11 +79,11 @@ return {
 					"diff",
 					"encoding",
 					-- "fileformat",
-					battery,
+					-- battery,
 					"filetype",
 				},
 				lualine_y = { "progress" },
-				lualine_z = { "location", "os.date('%H:%M')" },
+				-- lualine_z = { "location", "os.date('%H:%M')" },
 			},
 		})
 	end,
