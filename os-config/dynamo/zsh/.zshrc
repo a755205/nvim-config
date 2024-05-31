@@ -243,5 +243,3 @@ export FZF_CTRL_R_OPTS="
 eval "$(zoxide init zsh)"
 alias cd="z"
 
-
-

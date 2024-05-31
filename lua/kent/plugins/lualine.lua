@@ -27,6 +27,38 @@ return {
 			magenta = "#c678dd",
 			blue = "#51afef",
 			red = "#ec5f67",
+			-- [dracula] Color Palette
+			-- Palette	Hex	RGB	HSL	Color Picker Boxes
+			-- Background	#282a36	40 42 54	231° 15% 18%	Background Color
+			-- Current Line	#44475a	68 71 90	232° 14% 31%	Current Line Color
+			-- Selection	#44475a	68 71 90	232° 14% 31%	Selection Color
+			-- Foreground	#f8f8f2	248 248 242	60° 30% 96%	Foreground Color
+			-- Comment	#6272a4	98 114 164	225° 27% 51%	Comment Color
+			-- Cyan	#8be9fd	139 233 253	191° 97% 77%	Cyan Color
+			-- Green	#50fa7b	80 250 123	135° 94% 65%	Green Color
+			-- Orange	#ffb86c	255 184 108	31° 100% 71%	Orange Color
+			-- Pink	#ff79c6	255 121 198	326° 100% 74%	Pink Color
+			-- Purple	#bd93f9	189 147 249	265° 89% 78%	Purple Color
+			-- Red	#ff5555	255 85 85	0° 100% 67%	Red Color
+			-- Yellow	#f1fa8c	241 250 140	65° 92% 76%	Yellow Color
+			dracula = {
+				bg = "#282a36",
+				fg = "#f8f8f2",
+				yellow = "#f1fa8c",
+				cyan = "#8be9fd",
+				darkblue = "#44475a",
+				green = "#50fa7b",
+				orange = "#ffb86c",
+				violet = "#bd93f9",
+				magenta = "#ff79c6",
+				blue = "#6272a4",
+				red = "#ff5555",
+				pink = "#ff79c6",
+				purple = "#bd93f9",
+				comment = "#6272a4",
+				selection = "#44475a",
+				current_line = "#44475a",
+			},
 		}
 
 		require("battery").setup({
@@ -56,7 +88,12 @@ return {
 				section_separators = { left = "", right = "" },
 			},
 			sections = {
-				lualine_a = { "mode" },
+				-- lualine_a = { "mode" },
+				lualine_a = {
+					{
+						"mode",
+					},
+				},
 				lualine_b = { "branch" },
 				lualine_c = {
 					{
@@ -72,18 +109,46 @@ return {
 				},
 				lualine_x = {
 
-					-- { "filename", path = 4 },
-					-- { "tabs", path = 1, mode = 1 },
-
-					"diagnostics",
-					"diff",
-					"encoding",
-					-- "fileformat",
-					-- battery,
-					"filetype",
+					{
+						"diagnostics",
+						color = {
+							fg = colors.dracula.fg,
+							bg = colors.dracula.selection,
+						},
+					},
+					-- {
+					-- 	"diff",
+					-- 	color = {
+					-- 		fg = colors.dracula.fg,
+					-- 		bg = colors.dracula.selection,
+					-- 	},
+					-- },
+					{
+						"encoding",
+						color = {
+							fg = colors.dracula.fg,
+							bg = colors.dracula.bg,
+						},
+					},
 				},
-				lualine_y = { "progress" },
-				-- lualine_z = { "location", "os.date('%H:%M')" },
+				lualine_y = {
+					{
+						"filetype",
+						color = {
+							fg = colors.dracula.fg,
+							bg = colors.dracula.selection,
+						},
+					},
+				},
+				lualine_z = {
+					{
+						"progress",
+						color = {
+							fg = colors.dracula.fg,
+							bg = colors.dracula.bg,
+						},
+					},
+				},
 			},
 		})
 	end,
