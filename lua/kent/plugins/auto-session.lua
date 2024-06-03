@@ -5,8 +5,11 @@ return {
 		auto_session.setup({
 			auto_restore_enabled = false,
 			auto_session_suppress_dirs = {
+
+				-- /Users/user/repo
 				"~/",
 				"~/repo",
+				"/Users/user/repo",
 				"~/Downloads",
 				"~/Documents",
 				"~/Desktop",
