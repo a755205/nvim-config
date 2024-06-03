@@ -109,6 +109,18 @@ return {
 			-- end,
 		})
 
+		lspconfig["volar"].setup({
+			capabilities = capabilities,
+			-- on_attach = on_attach,
+			-- filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
+			init_options = {
+				-- hybirdMode = false,
+				typescript = {
+					tsdk = "/opt/homebrew/lib/node_modules/typescript/lib",
+				},
+			},
+		})
+
 		-- configure html server
 		lspconfig["html"].setup({
 			capabilities = capabilities,
