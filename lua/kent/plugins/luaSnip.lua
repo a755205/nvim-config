@@ -10,6 +10,18 @@ return {
 		require("kent.snips.lua")
 		require("kent.snips.javascript")
 
-		local ls = require("luasnip")
+		-- set keybindings to jump forward and backward
+		vim.api.nvim_set_keymap(
+			"i",
+			"<C-j>",
+			'<cmd>lua require("luasnip").jump(1)<CR>',
+			{ noremap = true, silent = true }
+		)
+		vim.api.nvim_set_keymap(
+			"i",
+			"<C-k>",
+			'<cmd>lua require("luasnip").jump(-1)<CR>',
+			{ noremap = true, silent = true }
+		)
 	end,
 }
