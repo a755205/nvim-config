@@ -33,6 +33,11 @@ function Close_and_switch_buffer()
 		::continue::
 	end
 
+	if string.find(current_buffer_name, "NvimTree") then
+		vim.cmd("NvimTreeClose")
+		return
+	end
+
 	-- Switch to the closest buffer
 	if closest_buffer then
 		local next_buffer = vim.api.nvim_buf_get_name(closest_buffer)
