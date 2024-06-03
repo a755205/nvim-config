@@ -38,7 +38,28 @@ return {
 				operators = {},
 			},
 			color_overrides = {},
-			custom_highlights = {},
+			custom_highlights = function(colors)
+				return {
+					Comment = { bg = colors.none },
+					-- Custom highlights
+					-- For example:
+					-- { "Comment", cterm = "italic" },
+					-- { "Conditional", guifg = "#ff0000" },
+					-- { "Function", guifg = "#ff0000" },
+					-- { "Keyword", guifg = "#ff0000" },
+					-- { "String", guifg = "#ff0000" },
+					-- { "Variable", guifg = "#ff0000" },
+					-- { "Number", guifg = "#ff0000" },
+					-- { "Boolean", guifg = "#ff0000" },
+					-- { "Property", guifg = "#ff0000" },
+					-- { "Type", guifg = "#ff0000" },
+					-- { "Operator", guifg = "#ff0000" },
+					-- { "Error", guifg = "#ff0000" },
+					-- { "Warning", guifg = "#ff0000" },
+					-- { "Information", guifg = "#ff0000" },
+					-- { "Hint", guifg = "#ff0000" },
+				}
+			end, -- Custom user highlights
 			integrations = {
 				cmp = true,
 				gitsigns = true,
