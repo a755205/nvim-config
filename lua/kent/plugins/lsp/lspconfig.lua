@@ -82,20 +82,17 @@ return {
 
 		mason_lspconfig.setup_handlers({
 			function(server_name)
-				-- -- lspconfig[server_name].setup({
-				-- -- 	capabilities = capabilities,
-				-- -- })
+				lspconfig[server_name].setup({
+					capabilities = capabilities,
+				})
 				local server_config = {}
 				if require("neoconf").get(server_name .. ".disable") then
 					return
 				end
-				if server_name == "volar" then
-					server_config.filetypes = { "vue", "typescript", "javascript" }
-				end
-				lspconfig[server_name].setup(server_config)
 				-- if server_name == "volar" then
-				--       {filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" }}
+				-- 	server_config.filetypes = { "vue", "typescript", "javascript" }
 				-- end
+				lspconfig[server_name].setup(server_config)
 			end,
 			-- ["volar"] = function()
 			-- 	lspconfig["volar"].setup({
@@ -111,8 +108,8 @@ return {
 
 		lspconfig["volar"].setup({
 			capabilities = capabilities,
-			-- on_attach = on_attach,
-			-- filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
+			on_attach = on_attach,
+			filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
 			init_options = {
 				-- hybirdMode = false,
 				typescript = {
