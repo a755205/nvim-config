@@ -120,6 +120,10 @@ return {
 			keymap.set("n", "<leader>fh", function()
 				toggle_telescope(harpoon:list())
 			end, { desc = "Open harpoon window" })
+
+			keymap.set("n", "<C-e>", function()
+				toggle_telescope(harpoon:list())
+			end, { desc = "Open harpoon window" })
 		end,
 	},
 	{
