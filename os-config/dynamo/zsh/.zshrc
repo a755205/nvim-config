@@ -153,6 +153,13 @@ alias sync-kitty='cp ~/.config/kitty/kitty.conf ~/.config/nvim/os-config/dynamo/
 # [async (tmux, zsh, kitty)]
 alias sync-os='sync-tmux && sync-zsh && sync-kitty'
 
+# /Users/user/my-repo/jilin
+# only allow in jilin folder
+#
+#
+alias php='docker exec -it jilin-api php' # require docker container name is jilin-api
+alias composer='docker exec -it jilin-api composer' # require docker container name is jilin-api
+
 
 # Alias [ls]
 alias ls='lsd'
