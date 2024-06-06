@@ -7,8 +7,11 @@ vim.g.mapleader = " "
 keymap("n", "<leader>pv", ":vim.cmd.Ex<CR>", { noremap = true, silent = true })
 
 -- Navigate buffers
-keymap("n", "<D-]>", ":bnext<CR>", opts)
-keymap("n", "<D-[>", ":bprevious<CR>", opts)
+-- keymap("n", "<D-]>", ":bnext<CR>", opts)
+-- keymap("n", "<D-[>", ":bprevious<CR>", opts)
+
+keymap("n", "<C-j>", ":bnext<CR>", opts)
+keymap("n", "<C-k>", ":bprevious<CR>", opts)
 
 -- Visual Line Mode 下多行移動
 keymap("v", "J", ":m '>+1<CR>gv=gv", opts)
