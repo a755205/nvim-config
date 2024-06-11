@@ -153,6 +153,20 @@ alias sync-kitty='cp ~/.config/kitty/kitty.conf ~/.config/nvim/os-config/dynamo/
 # [async (tmux, zsh, kitty)]
 alias sync-os='sync-tmux && sync-zsh && sync-kitty'
 
+# Alias [Docker]
+alias dcul='docker compose up -d --watch'
+alias dcd='docker compose down'
+alias dcr='docker compose restart'
+alias dclf='docker compose logs -f'
+alias dejilindb='docker exec -it jilin-api php artisan db'
+alias dejilinsh='docker exec -it jilin-api /bin/bash' 
+alias dexecapp='docker exec -it jilin-api php artisan ' 
+alias dcp='# docker container ps'
+
+
+
+
+
 # /Users/user/my-repo/jilin
 # only allow in jilin folder
 #
