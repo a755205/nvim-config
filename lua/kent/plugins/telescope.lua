@@ -28,10 +28,10 @@ return {
 					path_display = { "truncate " },
 					mappings = {
 						i = {
-							["<S-k>"] = actions.move_selection_previous, -- move to prev result
-							["<S-j>"] = actions.move_selection_next, -- move to next result
-							["<S-D-k>"] = actions.preview_scrolling_up, -- preview scroll up
-							["<S-D-j>"] = actions.preview_scrolling_down, -- preview scroll down
+							["<C-k>"] = actions.move_selection_previous, -- move to prev result
+							["<C-j>"] = actions.move_selection_next, -- move to next result
+							["<C-D-k>"] = actions.preview_scrolling_up, -- preview scroll up
+							["<C-D-j>"] = actions.preview_scrolling_down, -- preview scroll down
 						},
 					},
 				},
