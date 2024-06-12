@@ -43,7 +43,6 @@ return {
 			local keymap = vim.keymap
 
 			keymap.set("n", "<leader>ff", builtin.find_files, { desc = "尋找檔案" })
-			keymap.set("n", "<leader>fb", builtin.buffers, { desc = "尋找buffers" })
 			keymap.set("n", "<leader>ft", builtin.help_tags, { desc = "Fuzzy find help tags" })
 			keymap.set("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", { desc = "最近檔案" })
 			keymap.set("n", "<leader>fn", "<cmd>TodoTelescope<cr>", { desc = "尋找TODO" })
@@ -51,6 +50,16 @@ return {
 			keymap.set("n", "<leader>fc", "<cmd>Telescope grep_string<cr>", { desc = "Find String under cursor" })
 			keymap.set("n", "<leader>fk", "<cmd>Telescope keymaps<cr>", { desc = "Fuzzy find keymaps" })
 			keymap.set("n", "<leader>fd", "<cmd>Telescope lsp_document_diagnostics<cr>", { desc = "Show diagnostics" })
+
+			keymap.set("n", "<leader>fb", function()
+				builtin.buffers({
+					attach_mappings = function(_, map)
+						map("i", "<C-x>", actions.delete_buffer)
+						map("n", "x", actions.delete_buffer)
+						return true
+					end,
+				})
+			end, { desc = "尋找buffers" })
 
 			-- harpoon
 			local harpoon = require("harpoon")
