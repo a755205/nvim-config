@@ -7,7 +7,7 @@ return {
 		local eslint = require("lint.linters.eslint_d")
 
 		lint.linters_by_ft = {
-			javascript = { "eslint_d", "eslint" },
+			javascript = { "eslint_d" },
 			typescript = { "eslint_d" },
 			javascriptreact = { "eslint_d" },
 			typescriptreact = { "eslint_d" },
@@ -16,7 +16,7 @@ return {
 			-- vue = { "eslint_d" }, -- 要加入才會有lint
 			-- vue add eslint_d and template lint
 			--
-			vue = { "eslint_d" },
+			-- vue = { "eslint_d" },
 
 			html = { "htmlhint" },
 		}

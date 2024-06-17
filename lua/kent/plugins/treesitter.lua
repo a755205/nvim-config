@@ -30,6 +30,7 @@ return {
 				"dockerfile",
 				"gitignore",
 				"query",
+				"vue",
 			},
 
 			incremental_selection = {

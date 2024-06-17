@@ -111,7 +111,7 @@ return {
 			on_attach = on_attach,
 			filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
 			init_options = {
-				-- hybirdMode = false,
+				hybirdMode = false,
 				typescript = {
 					tsdk = "/opt/homebrew/lib/node_modules/typescript/lib",
 				},
@@ -125,6 +125,47 @@ return {
 			filetypes = { "html" },
 		})
 
+		-- ✗ vetur-vls vuels (keywords: vue)
+		-- add [vuels] to the list of servers
+		lspconfig["vuels"].setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+			filetypes = { "vue" },
+			flags = { debounce_text_changes = 150 },
+			settings = {
+				vetur = {
+
+					validation = {
+						template = true,
+						style = true,
+						script = true,
+					},
+					completion = {
+						autoImport = true,
+						useScaffoldSnippets = false,
+						tagCasing = "kebab",
+					},
+					format = {
+						defaultFormatter = {
+							js = "prettier",
+							ts = "prettier",
+						},
+						-- defaultFormatterOptions = {
+						-- 	js = {
+						-- 		semi = false,
+						-- 		singleQuote = true,
+						-- 	},
+						-- 	ts = {
+						-- 		semi = false,
+						-- 		singleQuote = true,
+						-- 	},
+						-- },
+						-- scriptInitialIndent = false,
+					},
+					-- useWorkspaceDependencies = true,
+				},
+			},
+		})
 		-- new configure vuels server with plugin
 
 		-- new configure vtsls server with plugin

@@ -1,4 +1,5 @@
 -- vim-vue
 return {
-	"leafOfTree/vim-vue-plugin",
+	-- "leafOfTree/vim-vue-plugin",
+	"posva/vim-vue",
 }

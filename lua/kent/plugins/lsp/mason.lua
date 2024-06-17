@@ -36,6 +36,7 @@ return {
 				"eslint",
 				-- "prismals",
 				"volar",
+				"vuels",
 				-- "cssmoduls-language-server",
 			},
 			-- auto-install configured servers (with lspconfig)
