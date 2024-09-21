@@ -19,8 +19,14 @@ return {
 		local lazygit = Terminal:new({
 			cmd = "lazygit",
 			hidden = true,
-			direction = "tab",
+			direction = "float",
 			display_name = "L.A.Z.Y.G.I.T",
+
+			float_opts = {
+				border = "curved",
+				-- width = 80,
+				-- height = 40,
+			},
 		})
 
 		function _lazygit_toggle()
