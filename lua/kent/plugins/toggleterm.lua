@@ -14,6 +14,8 @@ return {
 		})
 
 		local Terminal = require("toggleterm.terminal").Terminal
+
+		-- for [Lazygit]
 		local lazygit = Terminal:new({
 			cmd = "lazygit",
 			hidden = true,
@@ -30,6 +32,26 @@ return {
 			"<leader>tg",
 			"<cmd>lua _lazygit_toggle()<CR>",
 			{ noremap = true, silent = true, desc = "Lazygit" }
+		)
+
+		-- for execute nodejs index.js, path with vim oper dir
+		local _node = Terminal:new({
+			cmd = "node index.js",
+			hidden = true,
+			direction = "tab",
+			display_name = "NodeJs",
+			close_on_exit = false,
+		})
+
+		function _node_toggle()
+			_node:toggle()
+		end
+
+		vim.api.nvim_set_keymap(
+			"n",
+			"<leader>trn",
+			"<cmd>lua _node_toggle()<CR>",
+			{ noremap = true, silent = true, desc = "Run NodeJs In Current Path index.js" }
 		)
 	end,
 }
