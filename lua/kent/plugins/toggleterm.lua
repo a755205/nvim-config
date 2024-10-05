@@ -5,8 +5,9 @@ return {
 		local toggleterm = require("toggleterm")
 		toggleterm.setup({
 			size = 80,
-			-- open_mapping = [[<C-\>]], -- use this in office, macbook woth bluetooth keybord
-			open_mapping = [[<D-l>]], -- work in my macbook, with command
+			open_mapping = [[<C-\>]], -- use this in office, macbook woth bluetooth keybord
+			-- open_mapping = [[<C-l>]], -- work in my macbook, with command
+			-- open_mapping = [[<leader>to]], -- open or close terminal
 			direction = "vertical", -- direction = 'vertical' | 'horizontal' | 'tab' | 'float' ,
 			float_opts = {
 				border = "single", -- border = 'single' | 'double' | 'shadow' | 'curved' | ... other options supported by win open ]]
