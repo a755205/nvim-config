@@ -1,4 +1,9 @@
 
+
+export NODE_PATH='/usr/local/lib/node_modules' # <--- add this ~/.bashrc
+
+
+
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
@@ -132,7 +137,9 @@ alias tree3='tree -L 3'
 
 #Alias [Zsh]
 alias mz='vim ~/.zshrc' # for modify zshrc
+alias modify-zsh='vim ~/.zshrc' # for modify zshrc
 alias sz="source ~/.zshrc" # for source zshrc
+alias source-zsh='source ~/.zshrc' # for source zshrc
 
 # Alias [Exit]
 alias wqa='exit'
@@ -141,7 +148,9 @@ alias wq='exit'
 # Alias [Tmux]
 alias tmux='tmux -f ~/.tmux.conf'
 alias mt='vim ~/.tmux.conf' # for modify tmux config
+alias modify-tmux='vim ~/.tmux.conf' # for modify tmux config
 alias st='tmux source-file $HOME/.tmux.conf'
+alias source-tmux='tmux source-file $HOME/.tmux.conf'
 
 # Alias [Sync OS config to nvim os files]
 # [sync tmux]
@@ -183,7 +192,9 @@ alias lt='ls --tree'
 
 #Alias [Vim]
 alias mn='vim ~/.config/nvim' # for modify nvim config
-alias chear-vim-cache="rm -rf ~/.local/share/nvim && rm -rf ~/.cache/nvim && rm -rf ~/.local/state/nvim"
+alias modify-nvim='vim ~/.config/nvim' # for modify nvim config
+alias clear-vim-cache="rm -rf ~/.local/share/nvim && rm -rf ~/.cache/nvim && rm -rf ~/.local/state/nvim"
+alias clear-vim='clear-vim-cache'
 
 #Alias [Change Git]
 alias git='LANG=en_US git' # set get language as english
@@ -196,6 +207,12 @@ for zsh_extends in ~/.zsh_clilike_extend//*; do
   zsh_extends_name=$(basename $zsh_extends)
   alias ${zsh_extends_name%.*}="sh $zsh_extends"
 done
+
+# Alias for NPM
+alias ni='npm install'
+alias nu='npm uninstall'
+alias nrd='npm run dev'
+alias nid='ni && nrd'
 
 # Alias for vue test [vitest]
 alias vitest='npx vitest'
@@ -263,4 +280,15 @@ export FZF_CTRL_R_OPTS="
 # ---- Zoxide (better cd) ----
 eval "$(zoxide init zsh)"
 alias cd="z"
+
+# nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
+# add [mupdf] to PATH
+export PATH="/opt/homebrew/Cellar/mupdf/1.23.11_1/bin:$PATH"
+
+# add [openjdk] to PATH
+export PATH="$(brew --prefix openjdk)/bin:$PATH"
 
