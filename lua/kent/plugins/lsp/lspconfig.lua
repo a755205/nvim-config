@@ -8,23 +8,15 @@ return {
 		{ "folke/neoconf.nvim" }, -- new
 	},
 	config = function()
-		-- import lspconfig plugin
 		local lspconfig = require("lspconfig")
-
-		-- import mason_lspconfig plugin
 		local mason_lspconfig = require("mason-lspconfig")
-
-		-- import cmp-nvim-lsp plugin
 		local cmp_nvim_lsp = require("cmp_nvim_lsp")
-
 		local keymap = vim.keymap -- for conciseness
-
 		local opts = { noremap = true, silent = true }
 
 		local on_attach = function(client, bufnr)
 			opts.buffer = bufnr
 
-			-- set keybinds
 			opts.desc = "Show LSP references"
 			keymap.set("n", "gR", "<cmd>Telescope lsp_references<CR>", opts) -- show definition, references
 
@@ -65,20 +57,13 @@ return {
 			keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
 		end
 
-		-- used to enable autocompletion (assign to every lsp server config)
 		local capabilities = cmp_nvim_lsp.default_capabilities()
 
-		-- Change the Diagnostic symbols in the sign column (gutter)
-		-- (not in youtube nvim video)
 		local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
 		for type, icon in pairs(signs) do
 			local hl = "DiagnosticSign" .. type
 			vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 		end
-
-		local default_servers = {
-			"volar",
-		}
 
 		mason_lspconfig.setup_handlers({
 			function(server_name)
@@ -89,27 +74,22 @@ return {
 				if require("neoconf").get(server_name .. ".disable") then
 					return
 				end
-				-- if server_name == "volar" then
-				-- 	server_config.filetypes = { "vue", "typescript", "javascript" }
-				-- end
 				lspconfig[server_name].setup(server_config)
 			end,
-			-- ["volar"] = function()
-			-- 	lspconfig["volar"].setup({
-			-- 		capabilities = capabilities,
-			-- 		on_attach = on_attach,
-			-- 		filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
-			-- 		init_options = {
-			-- 			hybirdMode = false,
-			-- 		},
-			-- 	})
-			-- end,
 		})
+
+		--
+		-- Client: volar (id: 2, bufnr: [10])
+		-- 	filetypes:       vue, typescript, javascript, javascriptreact, typescriptreact
+		-- 	autostart:       true
+		-- 	root directory:  /Users/user/repo/fantasi-agency-operations-system
+		-- 	cmd:             /Users/user/.local/share/nvim/mason/bin/vue-language-server --stdio
+		--
 
 		lspconfig["volar"].setup({
 			capabilities = capabilities,
 			on_attach = on_attach,
-			filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
+			filetypes = { "vue", "typescript", "javascript", "javascriptreact", "typescriptreact" },
 			init_options = {
 				hybirdMode = false,
 				typescript = {
@@ -118,168 +98,39 @@ return {
 			},
 		})
 
-		-- configure html server
+		-- html
 		lspconfig["html"].setup({
 			capabilities = capabilities,
 			on_attach = on_attach,
 			filetypes = { "html" },
 		})
 
-		-- ✗ vetur-vls vuels (keywords: vue)
-		-- add [vuels] to the list of servers
-		lspconfig["vuels"].setup({
-			capabilities = capabilities,
-			on_attach = on_attach,
-			filetypes = { "vue" },
-			flags = { debounce_text_changes = 150 },
-			settings = {
-				vetur = {
-
-					validation = {
-						template = true,
-						style = true,
-						script = true,
-					},
-					completion = {
-						autoImport = true,
-						useScaffoldSnippets = false,
-						tagCasing = "kebab",
-					},
-					format = {
-						defaultFormatter = {
-							js = "prettier",
-							ts = "prettier",
-						},
-						-- defaultFormatterOptions = {
-						-- 	js = {
-						-- 		semi = false,
-						-- 		singleQuote = true,
-						-- 	},
-						-- 	ts = {
-						-- 		semi = false,
-						-- 		singleQuote = true,
-						-- 	},
-						-- },
-						-- scriptInitialIndent = false,
-					},
-					-- useWorkspaceDependencies = true,
-				},
-			},
-		})
-		-- new configure vuels server with plugin
-
-		-- new configure vtsls server with plugin
-		-- lspconfig["volar"].setup({
-		-- 	filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
-		-- 	capabilities = capabilities,
-		-- 	on_attach = on_attach,
-		-- 	init_options = {
-		-- 		vue = {
-		-- 			hybirdMode = false,
-		-- 		},
-		-- 	},
-		-- })
-
-		-- configure typescript server with plugin
-		-- TODO: 要對js or ts 檔案啟動lsp, 需要先安裝typescript-language-server ,注意是全域安裝
-		-- TODO: 要對js or ts 檔案啟動lsp, 需要先安裝typescript-language-server ,注意是全域安裝
-		-- TODO: 要對js or ts 檔案啟動lsp, 需要先安裝typescript-language-server ,注意是全域安裝
-		-- npm install -g typescript-language-server typescript
-		-- npm i -g @vue/typescript-plugin
-		-- lspconfig["tsserver"].setup({
-		-- 	filetypes = {
-		-- 		"javascript",
-		-- 		"typescript",
-		-- 		-- "typescriptreact",
-		-- 		-- "typescript.tsx",
-		-- 		"vue",
-		-- 	},
-		-- 	capabilities = capabilities,
-		-- 	on_attach = on_attach,
-		-- 	init_options = {
-		-- 		-- if you are using node version manager (nvm),
-		-- 		-- your global node modules will be stored under whatever version of node you are using at the time you saved the module.
-		-- 		-- So ~/.nvm/versions/node/{version}/lib/node_modules/.
-		-- 		plugins = {
-		-- 			{
-		-- 				name = "@vue/typescript-plugin",
-		-- 				location = os.getenv("HOME")
-		-- 					.. ".nvm/versions/node/v20.12.2/lib/node_modules/@vue/typescript-plugin",
-		-- 				languages = { "typescript", "vue", "javascript" },
-		-- 			},
-		-- 		},
-		-- 	},
-		-- })
-
-		-- new configure javascript server with plugin
-		-- eslint-language-server
-		-- lspconfig["eslint-language-server"].setup({
-		-- 	capabilities = capabilities,
-		-- 	on_attach = on_attach,
-		-- })
-
-		-- new configure quick_lint_js server with plugin
+		-- configure
 		lspconfig["quick_lint_js"].setup({
 			capabilities = capabilities,
 			on_attach = on_attach,
 		})
 
-		-- configure css server
+		-- css
 		lspconfig["cssls"].setup({
 			capabilities = capabilities,
 			on_attach = on_attach,
 		})
 
-		-- configure tailwindcss server
+		-- tailwindcss
 		lspconfig["tailwindcss"].setup({
 			capabilities = capabilities,
 			on_attach = on_attach,
 		})
 
-		-- configure svelte server
-		-- lspconfig["svelte"].setup({
-		-- 	capabilities = capabilities,
-		-- 	on_attach = function(client, bufnr)
-		-- 		on_attach(client, bufnr)
-		--
-		-- 		vim.api.nvim_create_autocmd("BufWritePost", {
-		-- 			pattern = { "*.js", "*.ts" },
-		-- 			callback = function(ctx)
-		-- 				if client.name == "svelte" then
-		-- 					client.notify("$/onDidChangeTsOrJsFile", { uri = ctx.file })
-		-- 				end
-		-- 			end,
-		-- 		})
-		-- 	end,
-		-- })
-		--
-		-- configure prisma orm server
-		-- lspconfig["prismals"].setup({
-		-- 	capabilities = capabilities,
-		-- 	on_attach = on_attach,
-		-- })
-
-		-- configure graphql language server
-		-- lspconfig["graphql"].setup({
-		-- 	capabilities = capabilities,
-		-- 	on_attach = on_attach,
-		-- 	filetypes = { "graphql", "gql", "svelte", "typescriptreact", "javascriptreact" },
-		-- })
-
-		-- configure emmet language server
+		-- emmet
 		lspconfig["emmet_ls"].setup({
 			capabilities = capabilities,
 			on_attach = on_attach,
 			filetypes = { "html", "typescriptreact", "javascriptreact", "vue", "css", "sass", "scss", "less", "svelte" },
 		})
 
-		-- configure python server
-		-- lspconfig["pyright"].setup({
-		-- 	capabilities = capabilities,
-		-- 	on_attach = on_attach,
-		-- })
-
-		-- configure lua server (with special settings)
+		-- lua
 		lspconfig["lua_ls"].setup({
 			capabilities = capabilities,
 			on_attach = on_attach,
@@ -299,5 +150,11 @@ return {
 				},
 			},
 		})
+
+		-- python
+		-- lspconfig["pyright"].setup({
+		-- 	capabilities = capabilities,
+		-- 	on_attach = on_attach,
+		-- })
 	end,
 }

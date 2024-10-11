@@ -5,15 +5,17 @@ return {
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
 	},
 	config = function()
-		-- import mason
 		local mason = require("mason")
-
-		-- import mason-lspconfig
+		local mason_registry = require("mason-registry")
 		local mason_lspconfig = require("mason-lspconfig")
-
 		local mason_tool_installer = require("mason-tool-installer")
 
-		-- enable mason and configure icons
+		-- TODO: 要記得手動安裝 eslint-lsp@4.8.0
+		-- TODO: 要記得手動安裝 eslint-lsp@4.8.0
+		-- TODO: 要記得手動安裝 eslint-lsp@4.8.0
+		--
+		-- :MasonInstall eslint-lsp@4.8.0
+
 		mason.setup({
 			ui = {
 				icons = {
@@ -25,7 +27,6 @@ return {
 		})
 
 		mason_lspconfig.setup({
-			-- list of servers for mason to install
 			ensure_installed = {
 				"tsserver",
 				"html",
@@ -34,10 +35,9 @@ return {
 				"lua_ls",
 				"emmet_ls",
 				"eslint",
-				-- "prismals",
-				"volar",
-				"vuels",
-				-- "cssmoduls-language-server",
+				-- "volar",
+				"volar@1.8.27", -- vue3在這個版本以上會有問題ㄝ, 所以要指定版本為1.8.27, 猜測是因為要適應typescript, 專案用ts的話可以不用指定版本
+				-- [volar@1.8.27]參考自 https://github.com/vuejs/language-tools/issues/3925#issuecomment-1974779443
 			},
 			-- auto-install configured servers (with lspconfig)
 			automatic_installation = true, -- not the same as ensure_installed
@@ -45,13 +45,10 @@ return {
 
 		mason_tool_installer.setup({
 			ensure_installed = {
-				"prettier", -- prettier formatter
-				"stylua", -- lua formatter
-				"eslint_d", -- js linter
+				"prettier",
+				"stylua",
+				"eslint",
 				"htmlhint",
-				-- lint for vuejs template
-				--
-				-- ✓ ast-grep ast_grep
 			},
 		})
 	end,

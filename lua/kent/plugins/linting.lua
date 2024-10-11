@@ -4,21 +4,24 @@ return {
 	event = { "BufReadPre", "BufNewFile" }, -- to disable, comment this out
 	config = function()
 		local lint = require("lint")
-		local eslint = require("lint.linters.eslint_d")
+		local eslint = require("lint.linters.eslint")
 
 		lint.linters_by_ft = {
-			javascript = { "eslint_d" },
-			typescript = { "eslint_d" },
-			javascriptreact = { "eslint_d" },
-			typescriptreact = { "eslint_d" },
-			svelte = { "eslint_d" },
-			python = { "pylint" },
-			-- vue = { "eslint_d" }, -- 要加入才會有lint
-			-- vue add eslint_d and template lint
-			--
-			-- vue = { "eslint_d" },
+			-- javascript = { "eslint" },
+			-- typescript = { "eslint" },
+			-- javascriptreact = { "eslint" },
+			-- typescriptreact = { "eslint" },
+			-- svelte = { "eslint" },
+			-- python = { "pylint" },
 
+			javascript = { "eslint" },
+			typescript = { "eslint" },
+			javascriptreact = { "eslint" },
+			typescriptreact = { "eslint" },
+			svelte = { "eslint" },
+			python = { "pylint" },
 			html = { "htmlhint" },
+			vue = { "eslint" }, -- 要加入才會有lint
 		}
 
 		eslint.args = {
