@@ -36,6 +36,8 @@ return {
 			green = "#8ec07c",
 			purple = "#bd93f9",
 			dark_purple = "#5d4d7a",
+			vim_green = "#5fd75f",
+			tmux_green = "#23d18b",
 
 			dracula = {
 				bg = "#282a36",
@@ -59,7 +61,7 @@ return {
 
 		local theme = {
 			normal = {
-				a = { fg = colors.white, bg = colors.dark_purple },
+				a = { fg = colors.white, bg = colors.black },
 				b = { fg = colors.white, bg = colors.black },
 				c = { fg = colors.white, bg = colors.black },
 				x = { fg = colors.white, bg = colors.black },
