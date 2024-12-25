@@ -28,7 +28,6 @@ return {
 
 		mason_lspconfig.setup({
 			ensure_installed = {
-				"tsserver",
 				"html",
 				"cssls",
 				"tailwindcss",
@@ -38,6 +37,7 @@ return {
 				-- "volar",
 				"volar@1.8.27", -- vue3在這個版本以上會有問題ㄝ, 所以要指定版本為1.8.27, 猜測是因為要適應typescript, 專案用ts的話可以不用指定版本
 				-- [volar@1.8.27]參考自 https://github.com/vuejs/language-tools/issues/3925#issuecomment-1974779443
+        "vtsls",
 			},
 			-- auto-install configured servers (with lspconfig)
 			automatic_installation = true, -- not the same as ensure_installed
